@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django_extensions',
+    'bootstrap4',
     'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',

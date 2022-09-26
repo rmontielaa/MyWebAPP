@@ -40,8 +40,8 @@ query=Question.objects.all()
 for q in query:
     print(q.status)
     
-ch1=choise(q2,'choise 1 from question 2',10)
-ch1=Choise(1,q2,'choise 1 from question 2',10)
+ch1=choice(q2,'choice 1 from question 2',10)
+ch1=choice(1,q2,'choice 1 from question 2',10)
 ch1
 get_ipython().run_line_magic('save', '(ch1)')
-ch1=Choise(1,2,'choise 1 from question 2',10)
+ch1=choice(1,2,'choice 1 from question 2',10)

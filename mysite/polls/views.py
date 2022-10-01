@@ -3,6 +3,7 @@ from multiprocessing import context
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 import json
+from django.views.generic import ListView
 from django.template import loader
 from django.urls import reverse
 from flask import Flask, render_template, abort, session
@@ -13,13 +14,27 @@ from .models import Question, choice
 
 # Create your views here.
 
-def index(request):
+'''def index(request):
     questions =Question.objects.all()
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     context = {'latest_question_list': latest_question_list}
     return render(request, 'polls/index.html', context)
     #return HttpResponse(template.render(context, request))
-
+'''
+class IndexView(ListView):
+    template_name = 'polls/index.html'
+    context_object_name = 'latest_question_list'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context ['mensaje']="Lista de ecuestas"
+        return context
+    
+    
+    def get_queryset(self):
+        query= Question.objects.order_by('-pub_date')[:5]
+        return query
+    
 #'''def hola_dos(request):
  #   return HttpResponse("hola Mundo/2")'''
 

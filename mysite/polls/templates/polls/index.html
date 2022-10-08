@@ -1,10 +1,8 @@
 <h1 class="display-3">Cuestionario original</h1>
-
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
-    <li><a class="form-control href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
-    <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+        <li class="bootstrap4"><a class="question_text" href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

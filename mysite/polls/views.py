@@ -1,6 +1,7 @@
 import json
 from multiprocessing import context
-from django.shortcuts import render, get_object_or_404
+from types import NoneType
+from django.shortcuts import render, get_object_or_404,redirect
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 import json
 from django.views.generic import ListView
@@ -11,7 +12,7 @@ from flask_bootstrap import Bootstrap
 app = Flask(__name__)
 Bootstrap(app)
 from .models import Question, choice
-
+from .forms import QuestionForm
 # Create your views here.
 
 '''def index(request):
@@ -59,7 +60,7 @@ def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
-    except (KeyError, Choice.DoesNotExist):
+    except (KeyError, choice.DoesNotExist):
         # Redisplay the question voting form.
         return render(request, 'polls/detail.html', {
             'question': question,
@@ -72,3 +73,22 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+    
+def add_or_change_question(request,question_id):
+    question = None
+    if question_id:
+        question = get_object_or_404(Question, pk=question_id)
+        if request.method == "POST":
+            form = QuestionForm(
+            data = request.POST,
+            files = request.FILES,
+            instance = question)
+            if form.is_valid():
+                question = form.save()
+                #return redirect("polls:detail", pk=question.pk)
+                return HttpResponseRedirect(reverse('polls:detail', args=(question.id,)))
+    
+        else:
+            form = QuestionForm(instance=question)
+    context = {"question": question, "form": form}
+    return render(request, "polls/polls_form.html", context)

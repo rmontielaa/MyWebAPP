@@ -11,7 +11,12 @@
             "program": "${workspaceFolder}\\mysite\\manage.py",
             "env": {
                 "DEBUG":"True",
-                "DJANGO_SECRET_KEY": "mDMWU2bWCh2THffQZa2TKPcGuX6OcK28g9hQOtTLDsQ6czYuRs"
+                "DJANGO_SECRET_KEY": "mDMWU2bWCh2THffQZa2TKPcGuX6OcK28g9hQOtTLDsQ6czYuRs",
+                "NAME":"ejemplo",
+                "USER":"postgres",
+                "PASSWORD":"example",
+                "HOST":"127.0.0.1",
+                "PORT":"5432",
             },
             "args": [
                 "runserver"

@@ -86,6 +86,8 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
     
 }'''
 #postgress
+MAX_CONN_AGE = 600
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
